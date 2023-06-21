@@ -1,71 +1,64 @@
-# codemath README
 
-This is the README for your extension "codemath". After writing up a brief description, we recommend including the following sections.
+![demo for usage codemath](assets/demo.gif)
+
+# VSCode CodeMath Extension
+
+The VSCode CodeMath Extension is a powerful tool that enables mathematical calculations and evaluations directly within Visual Studio Code.
+
+## Usage
+
+To use the CodeMath Extension, follow these steps:
+
+1. **Install the Extension**: Open the Extensions view in VS Code by pressing `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac). Search for the extension by name, "CodeMath", and click on "Install" to install it.
+
+2. **Open a file or create a new one in Visual Studio Code**.
+
+3. **Type a mathematical expression**: In the editor, type the mathematical expression you want to evaluate. End the expression with the `=` symbol. For example, `2 + 2 =`.
+
+4. **View the calculation**: After typing the `=` symbol, the CodeMath Extension will calculate the result and display it in the editor immediately after the `=` symbol. For example, `2 + 2 = 4`.
+
+5. **Evaluate and write the result**: To accept and write the calculated result, press the Enter key. The result will be written to the right of the `=` symbol. For example, `2 + 2 = 4`.
+
+**Note**: CodeMath supports various mathematical operations, including basic arithmetic (+, -, *, /) and advanced functions (sin, cos, tan, log, etc.).
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The CodeMath Extension offers the following features:
 
-For example if there is an image subfolder under your extension project workspace:
+- Mathematical expression evaluation
+- Support for basic arithmetic operations *`(+, -, *, /)`*
+- Support for advanced mathematical functions *`(sin, cos, tan, log, %, sqrt, ^, max, min, pi, etc.)`*
+- Interactive calculations within the editor
 
-\!\[feature X\]\(images/feature-x.png\)
+## Reporting issues
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+If you encounter any issues, bugs, or have suggestions for improvements, please open an issue on the GitHub repository of the CodeMath Extension: [Link to GitHub Issues](https://github.com/otnansirk/vscode-codemath-extension/issues)
 
-## Requirements
+Please provide detailed information about the problem you encountered and steps to reproduce it. This will help us investigate and resolve the issue more effectively.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Contributing
 
-## Extension Settings
+Contributions to the CodeMath Extension are welcome! If you would like to contribute, please follow these steps:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+1. Fork the repository and clone it to your local machine.
+2. Make the necessary changes or additions.
+3. Write tests to ensure the new features or bug fixes work correctly.
+4. Commit your changes and push them to your forked repository.
+5. Create a pull request from your forked repository to the main repository.
 
-For example:
+Please make sure to follow the coding style and guidelines specified in the repository.
 
-This extension contributes the following settings:
+## License
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+The CodeMath Extension is released under the [MIT License](LICENSE). You are free to use, modify, and distribute the extension in accordance with the terms of the license.
 
-## Known Issues
+<hr>
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+<div align="center">
+    <table>
+    <tr>
+        <td><img src="assets/logo.png" width="100"/></td>
+    </tr>
+    </table>
+    Made with ❤️ love
+</div>
