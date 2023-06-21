@@ -62,7 +62,6 @@ const calculateCommands = () => {
     // Do calculate
     const expression = lineText.slice(0, -1);
     const result     = calculate(expression);
-    console.log(parseFloat(evaluate(expression)));
 
     // Remove previous decoration
     setInActiveDecoration(activeEditor);
