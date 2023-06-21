@@ -19,7 +19,7 @@ To use the CodeMath Extension, follow these steps:
 
 5. **Evaluate and write the result**: To accept and write the calculated result, press the Enter key. The result will be written to the right of the `=` symbol. For example, `2 + 2 = 4`.
 
-**Note**: CodeMath supports various mathematical operations, including basic arithmetic (+, -, *, /) and advanced functions (sin, cos, tan, log, etc.).
+**Note**: CodeMath supports various mathematical operations, including basic arithmetic (+, -, *, /) and advanced functions (sin, cos, tan, log, %, sqrt, ^, max, min, pi, etc.).
 
 ## Features
 
