@@ -22,14 +22,6 @@
         "onStartupFinished"
     ],
     "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "codemath.helloWorld",
-                "title": "Hello World"
-            }
-        ]
-    },
     "scripts": {
         "vscode:prepublish": "yarn run compile",
         "compile": "tsc -p ./",
@@ -53,5 +45,14 @@
     },
     "dependencies": {
         "advanced-calculator": "^1.1.0"
-    }
+    },
+    "keywords": [
+        "codemath",
+        "math",
+        "calculations",
+        "development",
+        "efficiency",
+        "tool",
+        "utility"
+    ]
 }
