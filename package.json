@@ -28,7 +28,7 @@
         "watch": "tsc -watch -p ./",
         "pretest": "yarn run compile && yarn run lint",
         "lint": "eslint src --ext ts",
-        "test": "node ./out/test/runTest.js"
+        "test": "mocha "
     },
     "devDependencies": {
         "@types/glob": "^8.1.0",
@@ -41,6 +41,7 @@
         "eslint": "^8.41.0",
         "glob": "^8.1.0",
         "mocha": "^10.2.0",
+        "ts-node": "^10.9.1",
         "typescript": "^5.1.3"
     },
     "dependencies": {
@@ -54,5 +55,8 @@
         "efficiency",
         "tool",
         "utility"
-    ]
+    ],
+    "contributes": {
+        "changelog": "./CHANGELOG.md"
+    }
 }
