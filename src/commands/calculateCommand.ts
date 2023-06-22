@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import calculate from '../handlers/calculate';
-import { cleanExpression } from '../helpers/cleanExpression';
 
 
 const calculateCommands = () => {
@@ -35,7 +34,6 @@ const calculateCommands = () => {
     }
   };
 
-
   // subscribe to onDidChangeTextDocument event
   vscode.workspace.onDidChangeTextDocument(evnt => {
 
@@ -58,43 +56,47 @@ const calculateCommands = () => {
       return;
     }
 
+    try {
 
-    // Do calculate
-    const expression = cleanExpression(lineText.slice(0, -1));
-    const result     = calculate(expression);
+      // Do calculate
+      const expression = lineText.slice(0, -1);
+      const result     = calculate(expression);
 
-    // Remove previous decoration
-    setInActiveDecoration(activeEditor);
-
-    // Set active decoration
-    setActiveDecoration();
-
-    // Apply decoration to range
-
-
-    activeEditor.setDecorations(decorationType, [{
-      range,
-      renderOptions:{
-        after: {
-          contentText: `${result ? result.toLocaleString(): 'Invalid expression'}`
-        }
-      }
-    }]);
-
-    // Apply value of result to line after click Enter
-    if (evnt.contentChanges.some(change => change.text.includes('\n'))) {
-      const editWorkspace = new vscode.WorkspaceEdit();
-      const editRange     = new vscode.Range(
-                            rangeStart.translate(0, 1),
-                            rangeEnd.translate(0, 1)
-                          );
-
-      if (result) {
-        editWorkspace.insert(activeEditor.document.uri, editRange.start, `${result}`);
-        vscode.workspace.applyEdit(editWorkspace);
-      }
-
+      // Remove previous decoration
       setInActiveDecoration(activeEditor);
+
+      // Set active decoration
+      setActiveDecoration();
+
+      // Apply decoration to range
+      activeEditor.setDecorations(decorationType, [{
+        range,
+        renderOptions:{
+          after: {
+            contentText: `${result ? result.toLocaleString(): 'Invalid expression'}`
+          }
+        }
+      }]);
+
+      // Apply value of result to line after click Enter
+      if (evnt.contentChanges.some(change => change.text.includes('\n'))) {
+        const editWorkspace = new vscode.WorkspaceEdit();
+        const editRange     = new vscode.Range(
+                              rangeStart.translate(0, 1),
+                              rangeEnd.translate(0, 1)
+                            );
+
+        if (result) {
+          editWorkspace.insert(activeEditor.document.uri, editRange.start, `${result}`);
+          vscode.workspace.applyEdit(editWorkspace);
+        }
+
+        setInActiveDecoration(activeEditor);
+      }
+
+    } catch (error) {
+      vscode.window.showErrorMessage('Invalid expression!');
+      throw new Error("Unexpected func");
     }
 
   });
