@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { evaluate } from 'advanced-calculator';
 import calculate from '../handlers/calculate';
+import { cleanExpression } from '../helpers/cleanExpression';
 
 
 const calculateCommands = () => {
@@ -60,7 +60,7 @@ const calculateCommands = () => {
 
 
     // Do calculate
-    const expression = lineText.slice(0, -1);
+    const expression = cleanExpression(lineText.slice(0, -1));
     const result     = calculate(expression);
 
     // Remove previous decoration
@@ -82,7 +82,7 @@ const calculateCommands = () => {
     }]);
 
     // Apply value of result to line after click Enter
-    if (evnt.contentChanges.some(change => change.text === '\n')) {
+    if (evnt.contentChanges.some(change => change.text.includes('\n'))) {
       const editWorkspace = new vscode.WorkspaceEdit();
       const editRange     = new vscode.Range(
                             rangeStart.translate(0, 1),
