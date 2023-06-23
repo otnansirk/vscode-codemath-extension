@@ -8,6 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [v1.0.0]
 ### Added
+- Add code coverage and badge
+- Add unit test
+- Add LICENCE.md
 - Create handler: calculate
 - Add all features
 - This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
