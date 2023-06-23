@@ -62,5 +62,12 @@
     ],
     "contributes": {
         "changelog": "./CHANGELOG.md"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/otnansirk/vscode-codemath.git"
+    },
+    "bugs": {
+        "url": "https://github.com/otnansirk/vscode-codemath/issues"
     }
 }
