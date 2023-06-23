@@ -2,7 +2,7 @@
     "name": "codemath",
     "displayName": "CodeMath",
     "description": "Save time and effort calculating math problems in your development environment.",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "icon": "./assets/logo.png",
     "galleryBanner": {
         "color": "#0A3649",
