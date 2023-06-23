@@ -6,7 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-
+## [v1.0.0]
 ### Added
 - Create handler: calculate
 - Add all features
@@ -16,3 +16,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Initial commit
 
 [Unreleased]: https://github.com/otnansirk/vscode-codemath-extension/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/otnansirk/vscode-codemath-extension/releases/tag/v1.0.0
