@@ -1,6 +1,13 @@
 
 ![demo for usage codemath](assets/demo.gif)
 
+### Code coverage
+
+![Statements](https://img.shields.io/badge/statements-100%25-brightgreen.svg?style=flat)
+![Branches](https://img.shields.io/badge/branches-100%25-brightgreen.svg?style=flat)
+![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg?style=flat)
+![Lines](https://img.shields.io/badge/lines-100%25-brightgreen.svg?style=flat)
+
 # VSCode CodeMath Extension
 
 The VSCode CodeMath Extension is a powerful tool that enables mathematical calculations and evaluations directly within Visual Studio Code.

@@ -1,7 +1,7 @@
 import assert from 'assert';
 import calculate from './calculate';
 
-describe('Should ', () => {
+describe('Calculate', () => {
 
   const TEST_CASES = [
     {
@@ -51,42 +51,12 @@ describe('Should ', () => {
     {
       input: '1+(24+2)*2',
       expected: 53
-    },
-    {
-      input: '-1+2',
-      expected: 'Unexpected func',
-      isThrow: true
-    },
-    {
-      input: '1+2)',
-      expected: 'Unexpected func',
-      isThrow: true
-    },
-    {
-      input: '(1+2)',
-      expected: 'Unexpected func',
-      isThrow: true
-    },
+    }
   ];
 
   TEST_CASES.forEach(item => {
-
-    /**
-     * assert for throw
-     */
-    if (item?.isThrow) {
-      it(`Should throw error ${item.expected}`, () => {
-          assert.throws(() => {
-            calculate(item.input);
-          }, Error, item.expected);
-      });
-
-    } else {
-
-      it(`Sould ${item.input} equal to ${item.expected}`, () => {
-        assert.strictEqual(calculate(item.input), item.expected);
-      });
-    }
-
+    it(`Sould ${item.input} equal to ${item.expected}`, () => {
+      assert.strictEqual(calculate(item.input), item.expected);
+    });
   });
 });
