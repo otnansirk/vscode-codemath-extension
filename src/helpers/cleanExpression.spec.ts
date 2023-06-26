@@ -15,7 +15,23 @@ describe('Clean expression ', () => {
     {
       input: ' 10-2 ',
       expected: '10-2',
-    }
+    },
+    {
+      input: '* 10-2 ',
+      expected: ' 10-2',
+    },
+    {
+      input: '// 10-2 ',
+      expected: ' 10-2',
+    },
+    {
+      input: '# 10-2 ',
+      expected: ' 10-2',
+    },
+    {
+      input: '#10-2 ',
+      expected: '10-2',
+    },
   ];
 
   TEST_CASES.forEach(item => {

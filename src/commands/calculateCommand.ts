@@ -73,7 +73,7 @@ const calculateCommands = () => {
         range,
         renderOptions:{
           after: {
-            contentText: `${result ? result.toLocaleString(): 'Invalid expression'}`
+            contentText: `${result.toLocaleString()}`
           }
         }
       }]);
@@ -86,10 +86,8 @@ const calculateCommands = () => {
                               rangeEnd.translate(0, 1)
                             );
 
-        if (result) {
-          editWorkspace.insert(activeEditor.document.uri, editRange.start, `${result}`);
-          vscode.workspace.applyEdit(editWorkspace);
-        }
+        editWorkspace.insert(activeEditor.document.uri, editRange.start, `${result}`);
+        vscode.workspace.applyEdit(editWorkspace);
 
         setInActiveDecoration(activeEditor);
       }

@@ -46,11 +46,23 @@ describe('Calculate', () => {
     },
     {
       input: 'log(24)',
-      expected: 1.380211241711606
+      expected: 3.1780538303479458
     },
     {
       input: '1+(24+2)*2',
       expected: 53
+    },
+    {
+      input: '(2+2)',
+      expected: 4
+    },
+    {
+      input: '-1+1',
+      expected: 0
+    },
+    {
+      input: ' -1+1',
+      expected: 0
     }
   ];
 

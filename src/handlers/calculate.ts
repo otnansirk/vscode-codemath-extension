@@ -1,4 +1,4 @@
-import { evaluate } from "advanced-calculator";
+import { evaluate } from  "mathjs";
 import { cleanExpression } from "../helpers/cleanExpression";
 
 const calculate = (expression: string) => {
