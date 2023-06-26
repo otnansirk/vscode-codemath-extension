@@ -49,7 +49,7 @@
         "typescript": "^5.1.3"
     },
     "dependencies": {
-        "advanced-calculator": "^1.1.0"
+        "mathjs": "^11.8.2"
     },
     "keywords": [
         "codemath",
