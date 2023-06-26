@@ -8,6 +8,8 @@
 ![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg?style=flat)
 ![Lines](https://img.shields.io/badge/lines-100%25-brightgreen.svg?style=flat)
 
+<a href="https://www.producthunt.com/posts/codemath?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-codemath" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=401217&theme=light" alt="CodeMath - Save&#0032;time&#0032;and&#0032;effort&#0032;calculating&#0032;math&#0032;problems | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 # VSCode CodeMath Extension
 
 The VSCode CodeMath Extension is a powerful tool that enables mathematical calculations and evaluations directly within Visual Studio Code.
