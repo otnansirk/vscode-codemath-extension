@@ -39,17 +39,17 @@ const calculateCommands = () => {
 
     const activeEditor = vscode.window.activeTextEditor;
     if (!activeEditor) {
-        return;
+      return;
     }
 
     const currentPosition = activeEditor.selection.active;
-    const line            = activeEditor.document.lineAt(currentPosition.line);
-    const lineText        = line.text;
+    const line = activeEditor.document.lineAt(currentPosition.line);
+    const lineText = line.text;
 
     // Create range for create decoration
     const rangeStart = new vscode.Position(currentPosition.line, lineText.length - 1);
-    const rangeEnd   = new vscode.Position(currentPosition.line, lineText.length);
-    const range      = new vscode.Range(rangeStart, rangeEnd);
+    const rangeEnd = new vscode.Position(currentPosition.line, lineText.length);
+    const range = new vscode.Range(rangeStart, rangeEnd);
 
     if (!lineText.endsWith('=')) {
       setInActiveDecoration(activeEditor);
@@ -60,7 +60,7 @@ const calculateCommands = () => {
 
       // Do calculate
       const expression = lineText.slice(0, -1);
-      const result     = calculate(expression);
+      const result = calculate(expression);
 
       // Remove previous decoration
       setInActiveDecoration(activeEditor);
@@ -71,7 +71,7 @@ const calculateCommands = () => {
       // Apply decoration to range
       activeEditor.setDecorations(decorationType, [{
         range,
-        renderOptions:{
+        renderOptions: {
           after: {
             contentText: `${result.toLocaleString()}`
           }
@@ -81,10 +81,10 @@ const calculateCommands = () => {
       // Apply value of result to line after click Enter
       if (evnt.contentChanges.some(change => change.text.includes('\n'))) {
         const editWorkspace = new vscode.WorkspaceEdit();
-        const editRange     = new vscode.Range(
-                              rangeStart.translate(0, 1),
-                              rangeEnd.translate(0, 1)
-                            );
+        const editRange = new vscode.Range(
+          rangeStart.translate(0, 1),
+          rangeEnd.translate(0, 1)
+        );
 
         editWorkspace.insert(activeEditor.document.uri, editRange.start, `${result}`);
         vscode.workspace.applyEdit(editWorkspace);
@@ -93,7 +93,6 @@ const calculateCommands = () => {
       }
 
     } catch (error) {
-      vscode.window.showErrorMessage('Invalid expression!');
       throw new Error("Unexpected func");
     }
 
