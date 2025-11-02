@@ -63,6 +63,10 @@ describe('Calculate', () => {
     {
       input: ' -1+1',
       expected: 0
+    },
+    {
+      input: 'halo -1+1',
+      expected: null
     }
   ];
 

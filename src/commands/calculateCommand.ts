@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import calculate from '../handlers/calculate';
 
 
-const calculateCommands = () => {
+const calculateCommands = (context: vscode.ExtensionContext) => {
 
   let activeDecoration: vscode.TextEditorDecorationType | undefined = undefined;
 
@@ -18,8 +18,17 @@ const calculateCommands = () => {
   /**
    * Set decoration with decoration type
    */
-  const setActiveDecoration = (): void => {
+  const setActiveDecoration = (activeEditor: vscode.TextEditor, range: vscode.Range, result: number | null): void => {
     activeDecoration = decorationType;
+    activeEditor.setDecorations(decorationType, [{
+      range,
+      renderOptions: {
+        after: {
+          contentText: `${result?.toLocaleString() ?? ""}`
+        }
+      }
+    }]);
+    vscode.commands.executeCommand('setContext', 'codemath.previewActive', true);
   };
 
   /**
@@ -31,72 +40,106 @@ const calculateCommands = () => {
     if (activeDecoration) {
       activeEditor.setDecorations(activeDecoration, []);
       activeDecoration = undefined;
+      vscode.commands.executeCommand('setContext', 'codemath.previewActive', false);
     }
   };
+  let result: string | number | null = null;
 
   // subscribe to onDidChangeTextDocument event
-  vscode.workspace.onDidChangeTextDocument(evnt => {
-
-    const activeEditor = vscode.window.activeTextEditor;
-    if (!activeEditor) {
-      return;
-    }
-
-    const currentPosition = activeEditor.selection.active;
-    const line = activeEditor.document.lineAt(currentPosition.line);
-    const lineText = line.text;
-
-    // Create range for create decoration
-    const rangeStart = new vscode.Position(currentPosition.line, lineText.length - 1);
-    const rangeEnd = new vscode.Position(currentPosition.line, lineText.length);
-    const range = new vscode.Range(rangeStart, rangeEnd);
-
-    if (!lineText.endsWith('=')) {
-      setInActiveDecoration(activeEditor);
-      return;
-    }
+  const disposable = vscode.workspace.onDidChangeTextDocument(evnt => {
 
     try {
 
+      const activeEditor = vscode.window.activeTextEditor;
+      if (!activeEditor) {
+        return;
+      }
+
+      const currentPosition = activeEditor.selection.active;
+      const lineText = activeEditor.document.lineAt(currentPosition.line).text;
+
+      if (lineText.length === 0 || !lineText.endsWith('=')) {
+        setInActiveDecoration(activeEditor);
+        return;
+      }
+
       // Do calculate
       const expression = lineText.slice(0, -1);
-      const result = calculate(expression);
+      result = calculate(expression);
 
       // Remove previous decoration
       setInActiveDecoration(activeEditor);
 
-      // Set active decoration
-      setActiveDecoration();
 
+      // Create range for create decoration
+      const rangeStart = new vscode.Position(currentPosition.line, lineText.length - 1);
+      const rangeEnd = new vscode.Position(currentPosition.line, lineText.length);
+      const range = new vscode.Range(rangeStart, rangeEnd);
+
+      // Set active decoration
       // Apply decoration to range
-      activeEditor.setDecorations(decorationType, [{
-        range,
-        renderOptions: {
-          after: {
-            contentText: `${result.toLocaleString()}`
-          }
-        }
-      }]);
+      setActiveDecoration(activeEditor, range, result);
 
       // Apply value of result to line after click Enter
-      if (evnt.contentChanges.some(change => change.text.includes('\n'))) {
-        const editWorkspace = new vscode.WorkspaceEdit();
-        const editRange = new vscode.Range(
-          rangeStart.translate(0, 1),
-          rangeEnd.translate(0, 1)
-        );
+      if ((evnt.contentChanges.some(change => change.text.includes('\n') || change.text.includes('\r'))) && result !== null) {
+        const editor = activeEditor;
+        const lineNum = editor.selection.active.line;
+        const lineText = editor.document.lineAt(lineNum).text;
 
-        editWorkspace.insert(activeEditor.document.uri, editRange.start, `${result}`);
-        vscode.workspace.applyEdit(editWorkspace);
-
-        setInActiveDecoration(activeEditor);
+        const insertPos = new vscode.Position(lineNum, lineText.length);
+        editor.edit(editBuilder => {
+          editBuilder.insert(insertPos, `${result} `);
+        }).then(() => {
+          setInActiveDecoration(editor);
+        });
       }
 
     } catch (error) {
-      throw new Error("Unexpected func");
+      console.log("Unexpected func");
     }
-
   });
+
+  const disposableTab = vscode.commands.registerCommand('codemath.applyResult', () => {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor || !result) return;
+
+    const pos = editor.selection.active;
+    editor.edit(editBuilder => {
+      editBuilder.insert(pos, `${result} `);
+    }).then(() => {
+      setInActiveDecoration(editor);
+    });
+  });
+
+  const disposableCursor = vscode.window.onDidChangeTextEditorSelection(ev => {
+    const editor = ev.textEditor;
+    const pos = editor.selection.active;
+    const lineText = editor.document.lineAt(pos.line).text;
+
+    if (lineText.length === 0 || !lineText.endsWith('=')) {
+      setInActiveDecoration(editor);
+      return;
+    }
+    try {
+      const lineNum = editor.selection.active.line;
+      const rangeStart = new vscode.Position(lineNum, 0);
+      const rangeEnd = new vscode.Position(lineNum, lineText.length);
+      const range = new vscode.Range(rangeStart, rangeEnd);
+      const expression = lineText.slice(0, -1);
+      result = calculate(expression);
+
+      if (lineText.endsWith('=') && result !== null) {
+        setActiveDecoration(editor, range, result as number);
+      } else {
+        setInActiveDecoration(editor);
+      }
+
+    } catch (error) {
+      console.log("Unexpected func");
+    }
+  });
+
+  context.subscriptions.push(disposable, disposableTab, disposableCursor);
 };
 
 export default calculateCommands;
