@@ -3,7 +3,7 @@
     "displayName": "CodeMath",
     "description": "Save time and effort calculating math problems in your development environment.",
     "version": "1.0.1",
-    "icon": "./assets/logo.png",
+    "icon": "assets/logo.png",
     "galleryBanner": {
         "color": "#0A3649",
         "theme": "dark"
