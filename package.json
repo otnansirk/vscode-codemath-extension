@@ -23,13 +23,13 @@
     ],
     "main": "./out/extension.js",
     "scripts": {
-        "vscode:prepublish": "pnpm compile",
+        "vscode:prepublish": "yarn compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "pretest": "pnpm compile && pnpm lint",
+        "pretest": "yarn compile && yarn lint",
         "lint": "eslint src --ext ts",
         "test": "mocha",
-        "cov": "nyc pnpm test && istanbul-badges-readme"
+        "cov": "nyc yarn test && istanbul-badges-readme"
     },
     "devDependencies": {
         "@istanbuljs/nyc-config-typescript": "^1.0.2",
