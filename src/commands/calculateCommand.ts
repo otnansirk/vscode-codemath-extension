@@ -88,7 +88,8 @@ const calculateCommands = (context: vscode.ExtensionContext) => {
 
         const insertPos = new vscode.Position(lineNum, lineText.length);
         editor.edit(editBuilder => {
-          editBuilder.insert(insertPos, `${result}`);
+          const space = lineText.match(/(\s?)=$/)?.[1] ?? '';
+          editBuilder.insert(insertPos, `${space}${result}`);
         }).then(() => {
           setInActiveDecoration(editor);
         });
@@ -105,7 +106,8 @@ const calculateCommands = (context: vscode.ExtensionContext) => {
 
     const pos = editor.selection.active;
     editor.edit(editBuilder => {
-      editBuilder.insert(pos, `${result}`);
+      const space = editor.document.lineAt(pos.line).text.match(/(\s?)=$/)?.[1] ?? '';
+      editBuilder.insert(pos, `${space}${result}`);
     }).then(() => {
       setInActiveDecoration(editor);
     });
