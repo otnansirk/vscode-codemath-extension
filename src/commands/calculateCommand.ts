@@ -88,7 +88,7 @@ const calculateCommands = (context: vscode.ExtensionContext) => {
 
         const insertPos = new vscode.Position(lineNum, lineText.length);
         editor.edit(editBuilder => {
-          editBuilder.insert(insertPos, `${result} `);
+          editBuilder.insert(insertPos, `${result}`);
         }).then(() => {
           setInActiveDecoration(editor);
         });
@@ -105,7 +105,7 @@ const calculateCommands = (context: vscode.ExtensionContext) => {
 
     const pos = editor.selection.active;
     editor.edit(editBuilder => {
-      editBuilder.insert(pos, `${result} `);
+      editBuilder.insert(pos, `${result}`);
     }).then(() => {
       setInActiveDecoration(editor);
     });
